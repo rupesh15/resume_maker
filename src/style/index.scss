@@ -1,0 +1,24 @@
+/* Primary Button */
+$btn-primary: #3366FF;  /* Modern blue */
+$btn-primary-hover: darken($btn-primary, 10%);  /* Darker blue on hover */
+$form-background:#f2f2f2;
+
+/* Clear Button */
+$btn-clear-bg: transparent;
+$btn-clear-border: #6c757d;
+$btn-clear-text: #6c757d;
+
+.btn-clear {
+  background-color: $btn-clear-bg;
+  color: $btn-clear-text;
+  border: 1px solid $btn-clear-border;
+  
+  &:hover {
+    background-color: rgba(108, 117, 125, 0.1);
+    border-color: darken($btn-clear-border, 10%);
+  }
+}
+
+.inputbox_background {
+    background-color: $form-background;
+}
