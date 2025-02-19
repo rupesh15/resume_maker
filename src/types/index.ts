@@ -1,11 +1,6 @@
-export interface User {
-    id: number;
+export interface UserState {
+    email: string;
     name: string;
-    email?: string;
+    phoneNumber: string;
   }
   
-  export interface UserState {
-    user: User | null;
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null;
-  }

@@ -1,31 +1,79 @@
 // src/App.tsx
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+import { resetUser, setEmail, setName, setphoneNumber } from "../store/reducer";
 
 const App: React.FC = () => {
+  const [user, handleuserName] = useState<string>("");
+  const [email, handleEmail] = useState<string>("");
+  const [phoneNumber, handlePhonenumber] = useState<string>();
+  const dispatch: AppDispatch = useDispatch();
+
+  const handleValidation = (e: React.FormEvent<HTMLFormElement>) => {
+    if (user && email && phoneNumber) {
+      dispatch(setEmail(email));
+      dispatch(setName(user));
+      dispatch(setphoneNumber(phoneNumber));
+    } else {
+      alert("ooops.. something went wrong");
+    }
+  };
+
   return (
-    <Container fluid className="min-vh-100 d-flex justify-content-center align-items-center">
+    <Container
+      fluid
+      className="min-vh-100 d-flex justify-content-center align-items-center"
+    >
       <Row className="w-100">
-        <Col  className="d-flex justify-content-center">
-        <form className='border border-1 border-dark p-5 inputbox_background'>
-          <div className='input-group mb-3'>
-            <span className='input-group-text'>Email</span>
-            <input type='email' className='form-control' placeholder='Email'/>
-          </div>
-          <div className='input-group mb-3'>
-            <span className='input-group-text'>Name</span>
-            <input type='email' className='form-control' placeholder='Name'/>
-          </div>
-          <div className='input-group mb-3'>
-            <span className='input-group-text'>{'\u{1F4F1}'}</span>
-            <input type='number' className='form-control' placeholder='Phone no.'/>
-          </div>
-         <button type='submit' className='btn btn-primary me-5'>
-             submit
-         </button>
-         <button type='reset' className='btn btn-clear'>
-             Clear
-         </button>
+        <Col className="d-flex justify-content-center">
+          <form
+            className="border border-1 border-dark p-5 inputbox_background"
+            onSubmit={handleValidation}
+          >
+            <div className="input-group mb-3">
+              <span className="input-group-text">Email</span>
+              <input
+                type="email"
+                className="form-control"
+                placeholder="Email"
+                onChange={(event) => handleEmail(event.target.value)}
+                required
+              />
+            </div>
+            <div className="input-group mb-3">
+              <span className="input-group-text">Name</span>
+              <input
+                type="string"
+                className="form-control"
+                placeholder="Name"
+                onChange={(event) => handleuserName(event.target.value)}
+                required
+              />
+            </div>
+            <div className="input-group mb-3">
+              <span className="input-group-text">{"\u{1F4F1}"}</span>
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Phone no."
+                onChange={(event) => handlePhonenumber(event.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary me-5">
+              submit
+            </button>
+            <button
+              type="reset"
+              className="btn btn-clear"
+              onClick={() => {
+               dispatch(resetUser())
+              }}
+            >
+              Clear
+            </button>
           </form>
         </Col>
       </Row>
