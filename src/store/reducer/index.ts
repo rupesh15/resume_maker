@@ -5,6 +5,9 @@ const initialState: UserState = {
   email: '',
   name: '',
   phoneNumber: '',
+  address: '',
+  summary: '',
+  skills: ''
 };
 
 const userSlice = createSlice({
@@ -20,6 +23,16 @@ const userSlice = createSlice({
     setphoneNumber: (state, action: PayloadAction<string>) => {
       state.phoneNumber = action.payload;
     },
+    setAddress: (state, action: PayloadAction<string>) => {
+      state.address = action.payload;
+    },
+    setSummary: (state, action: PayloadAction<string>) => {
+      state.address = action.payload;
+    },
+    setSkills: (state, action: PayloadAction<string>) => {
+      state.address = action.payload;
+    },
+    
     resetUser: (state) => {
       state.email = '';
       state.name = '';
@@ -28,5 +41,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setEmail, setName, setphoneNumber, resetUser } = userSlice.actions;
+export const { setEmail, setName, setphoneNumber, resetUser, setAddress, setSummary, setSkills } = userSlice.actions;
 export default userSlice.reducer;

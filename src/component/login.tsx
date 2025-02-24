@@ -4,18 +4,24 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 import { resetUser, setEmail, setName, setphoneNumber } from "../store/reducer";
+import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
   const [user, handleuserName] = useState<string>("");
   const [email, handleEmail] = useState<string>("");
   const [phoneNumber, handlePhonenumber] = useState<string>();
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleValidation = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (user && email && phoneNumber) {
       dispatch(setEmail(email));
       dispatch(setName(user));
       dispatch(setphoneNumber(phoneNumber));
+      navigate('/homepage')
+
     } else {
       alert("ooops.. something went wrong");
     }
@@ -69,7 +75,7 @@ const App: React.FC = () => {
               type="reset"
               className="btn btn-clear"
               onClick={() => {
-               dispatch(resetUser())
+                dispatch(resetUser());
               }}
             >
               Clear
